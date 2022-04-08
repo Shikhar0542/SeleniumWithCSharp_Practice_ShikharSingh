@@ -1,0 +1,28 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Url = "https://demo.guru99.com/test/newtours/index.php";
+            driver.FindElement(By.Name("userName")).SendKeys("mercury");
+            driver.FindElement(By.Name("password")).SendKeys("mercury");
+            driver.FindElement(By.Name("submit")).Click();
+            IWebElement s = driver.FindElement(By.XPath("/html/body/div[2]/table/tbody/tr/td[2]/table/tbody/tr[4]/td/table/tbody/tr/td[2]/table/tbody/tr[1]/td/h3"));
+            bool x = s.Displayed;
+            Console.WriteLine("Whether login is done or not= " + x);
+            driver.FindElement(By.XPath("/html/body/div[2]/table/tbody/tr/td[2]/table/tbody/tr[2]/td/table/tbody/tr/td[1]")).Click();
+            driver.Close();
+        }
+    }
+}
