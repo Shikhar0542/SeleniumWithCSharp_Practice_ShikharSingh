@@ -1,0 +1,42 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //opening the url
+            IWebDriver driver = new ChromeDriver();
+            //opening the webiste link
+            driver.Navigate().GoToUrl("https://www.techlistic.com/p/selenium-practice-form.html");
+            //entering the first name in website
+            driver.FindElement(By.Name("firstname")).SendKeys("Shikhar");
+            //entering the last name in website
+            driver.FindElement(By.Name("lastname")).SendKeys("Singh");
+            //clickingb on male button
+            driver.FindElement(By.Id("sex-0")).Click();
+            //clicking on experience button
+            driver.FindElement(By.Id("exp-1")).Click();
+            //Entering the date of birth
+            driver.FindElement(By.Id("datepicker")).SendKeys("01/05/1999");
+            //clicking on profession button
+            driver.FindElement(By.Id("profession-1")).Click();
+            //clicking on tool button
+            driver.FindElement(By.Id("tool-2")).Click();
+            //Selecting the contitent from drop down
+            IWebElement cont=driver.FindElement(By.Id("continents"));
+            SelectElement p = new SelectElement(cont);
+            //Selected the antartica
+            p.SelectByIndex(6);
+            driver.Close();
+        }
+    }
+}
