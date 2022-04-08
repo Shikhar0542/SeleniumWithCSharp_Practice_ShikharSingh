@@ -1,0 +1,27 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://www.globalsqa.com/demo-site/draggableboxes/");
+            driver.Manage().Window.Maximize();
+            Actions act = new Actions(driver);
+            driver.SwitchTo().Frame(driver.FindElement(By.XPath("//*[@id='post-2665']/div[2]/div/div/div[1]/p/iframe")));
+            act.ClickAndHold(driver.FindElement(By.Id("draggable"))).MoveByOffset(100, 100).Release().Build().Perform();
+            
+        }
+    }
+}
