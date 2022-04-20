@@ -1,0 +1,22 @@
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System.Collections.Generic;
+using System.Threading;
+
+        [TestMethod]
+        public void practice()
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("http://www.seleniumframework.com/Practiceform/");
+string tocheck=driver.Title;
+            string check = "Selenium Framework | Practiceform";
+
+            //using assert to check it
+            Assert.AreEqual(check, tocheck);
+
+            //taking screenshot of current page
+            ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile("screenshot", ScreenshotImageFormat.Jpeg);
+            Thread.Sleep(2000);
