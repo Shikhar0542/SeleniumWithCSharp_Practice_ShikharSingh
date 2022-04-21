@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+namespace UnitTestProject1
+{
+    [TestClass]
+    public class handleWindows
+    {
+        [TestMethod]
+        public void switching()
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("http://www.seleniumframework.com/Practiceform/");
+            driver.FindElement(By.Id("button1")).Click();
+            var d= driver.WindowHandles;
+            List<string> w = new List<string>();
+            foreach(var t in d)
+            {
+                w.Add(t.ToString());
+            }
+            driver.SwitchTo().Window(w[1]);
+
+            driver.FindElement(By.LinkText("Special Cases")).Click();
+            Thread.Sleep(2000);
+            int a=driver.FindElements(By.XPath("//*[@id='ui-id-14']/div/ul/li")).Count;
+            Assert.IsTrue(a == 6);
+            driver.Quit();
+        }
+        
+    }
+}
