@@ -1,0 +1,62 @@
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+namespace UnitTestProject1
+{
+    [TestClass]
+    public class CPSAT
+    {
+        [TestMethod]
+        public void Question2()
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://mockexam1cpsat.agiletestingalliance.org/index.php/list-of-participants/");
+
+            // after opening the list of participants the main operation starts from here
+            int x = 0;
+            for(int i=4; i<=9;i++)
+            {
+                driver.FindElement(By.XPath("//*[@id='footable_350']/tfoot/tr/td/div/ul/li[" + i + "}/a")).Click();
+                if (i != 9)
+                {
+                    for (int j = 1; j <= 5; j++)
+                    {
+                        string s = driver.FindElement(By.XPath("//*[@id='footable_350']/tbody/tr[" + j + "]/td[2]")).Text;
+                        if (s.Equals("Sapna Sahu"))
+                        {
+                            string desn = driver.FindElement(By.XPath("//*[@id='footable_350']/tbody/tr[" + j + "]/td[3]")).Text;
+                            string comp = driver.FindElement(By.XPath("//*[@id='footable_350']/tbody/tr[" + j + "]/td[4]")).Text;
+                            if (desn.Equals("Functional Test Engineer") && comp.Equals("Amdocs"))
+                            {
+                                Console.WriteLine("the entries are correct");
+                                x = 1; break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    for (int j = 1; j <= 3; j++)
+                    {
+                        string s = driver.FindElement(By.XPath("//*[@id='footable_350']/tbody/tr[" + j + "]/td[2]")).Text;
+                        if (s.Equals("Sapna Sahu"))
+                        {
+                            string desn = driver.FindElement(By.XPath("//*[@id='footable_350']/tbody/tr[" + j + "]/td[3]")).Text;
+                            string comp = driver.FindElement(By.XPath("//*[@id='footable_350']/tbody/tr[" + j + "]/td[4]")).Text;
+                            if (desn.Equals("Functional Test Engineer") && comp.Equals("Amdocs"))
+                            {
+                                Console.WriteLine("the entries are correct");
+                                x = 1; break;
+                            }
+                        }
+                    }
+                }
+                if (x == 1)
+                    break;
+            }
+                
+        }
+    }
+}
