@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
+
+namespace UnitTestProject2
+{
+    [TestClass]
+    public class Question2
+    {
+
+        [TestMethod]
+        public void LetsCheck()
+        {
+
+
+            IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://mockexam1cpsat.agiletestingalliance.org/index.php/challenge-1/");
+            driver.FindElement(By.XPath("//*[@id='elementor-popup-modal-298']/div[2]")).Click();
+            for(int i=1; i<=5;i++)
+            {
+                string s=driver.FindElement(By.XPath("//*[@id='eael-adv-accordion-cf8d59b']/div[" + i + "]/div[1]")).GetAttribute("class");
+                Console.WriteLine("Coulour of tab before click = Violet");
+                driver.FindElement(By.XPath("//*[@id='eael-adv-accordion-cf8d59b']/div[" + i + "]/div[1]/i[1]")).Click();
+                string ss = driver.FindElement(By.XPath("//*[@id='eael-adv-accordion-cf8d59b']/div[" + i + "]/div[1]")).GetAttribute("class");
+                Console.WriteLine("Coulour of tab before click = DarkBlue");
+                Console.WriteLine();
+                Assert.AreEqual(s, ss);
+                string description= driver.FindElement(By.XPath("//*[@id='eael-adv-accordion-cf8d59b']/div[" + i + "]/div[2]/p[2]")).Text;
+                Console.WriteLine(description);
+                Thread.Sleep(3000);
+                Console.WriteLine();
+                Console.WriteLine();
+            }
+
+
+
+        }
+    }  
+}
+//*[@id="eael-adv-accordion-cf8d59b"]/div[1]/div/i[1]
+//*[@id="elementor-tab-content-2171"]/p[2]
