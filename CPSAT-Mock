@@ -1,0 +1,33 @@
+using System;
+using System.Threading;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+namespace UnitTestProject2
+{
+    [TestClass]
+    public class MockTest
+    {
+        [TestMethod]
+        public void Mock()
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://www.rediff.com/");
+
+            //Clicking on get ahead
+            driver.FindElement(By.XPath("/html/body/div[5]/ul/li[7]")).Click();
+            Thread.Sleep(2000);
+
+            //Write code for the screenshot by own
+
+            //taking all hrefs link
+            int n=driver.FindElements(By.XPath("/html/body/div[5]/div[2]/ul/li")).Count;
+            for(int i=1;i<=n;i++)
+            {
+                String s = driver.FindElement(By.XPath("/html/body/div[5]/div[2]/ul/li[" + i + "]/a")).GetAttribute("href");
+                Console.WriteLine(s);
+            }
+        }
+    }
+}
